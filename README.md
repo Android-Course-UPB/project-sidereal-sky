@@ -1,5 +1,5 @@
 # TV Show Finder
-Name: Alexandra Moroiu
+Name: Alexandra Moroiu<br>
 Group: SSA1-C
 
 A simple and intuitive Android application built with Jetpack Compose that helps users discover TV shows. 
