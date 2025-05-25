@@ -1,4 +1,6 @@
 # TV Show Finder
+Name: Alexandra Moroiu
+Group: SSA1-C
 
 A simple and intuitive Android application built with Jetpack Compose that helps users discover TV shows. 
 The app uses the TV Maze API to fetch show information and provides a clean interface for browsing shows and their details.
@@ -86,5 +88,6 @@ The app also uses a manual dependency injection approach with an Application Con
 ## Resources
 
 - [TV Maze API](https://www.tvmaze.com/api) for providing the show data
+- [Google Android Developers](https://developer.android.com/courses/android-basics-compose/unit-5) for Android tutorials
 - [Jetpack Compose](https://developer.android.com/jetpack/compose) for the modern UI toolkit
 - [Material 3](https://m3.material.io/) for the design system 
