@@ -2,7 +2,6 @@ package com.example.tvshowtracker.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -45,10 +44,6 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.tvshowtracker.models.Episode
 import com.example.tvshowtracker.ui.DetailsViewModel
-import com.example.tvshowtracker.utils.removeHtmlTags
-import kotlinx.serialization.json.Json
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -163,7 +158,7 @@ fun DetailsScreen(
                 Spacer(modifier = Modifier.height(12.dp))
                 val selectedSeason = seasons.getOrNull(selectedSeasonIndex)
                 episodes.filter { it.season == selectedSeason }.forEach { episode ->
-                    EpisodeItem(episode = episode, navController = navController)
+                    EpisodeItem(episode)
                 }
             } else {
                 Text("No episodes available", style = MaterialTheme.typography.bodyLarge)
@@ -173,16 +168,11 @@ fun DetailsScreen(
 }
 
 @Composable
-fun EpisodeItem(episode: Episode, navController: NavController) {
+fun EpisodeItem(episode: Episode) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 6.dp)
-            .clickable {
-                val episodeJson = Json.encodeToString(Episode.serializer(), episode)
-                val encodedJson = URLEncoder.encode(episodeJson, StandardCharsets.UTF_8.toString())
-                navController.navigate("episode/$encodedJson")
-            },
+            .padding(vertical = 6.dp),
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
@@ -199,3 +189,5 @@ fun EpisodeItem(episode: Episode, navController: NavController) {
         }
     }
 }
+
+fun String.removeHtmlTags(): String = this.replace(Regex("<.*?>"), "")

@@ -6,13 +6,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.tvshowtracker.models.Episode
 import com.example.tvshowtracker.ui.screens.DetailsScreen
-import com.example.tvshowtracker.ui.screens.EpisodeDetailsScreen
 import com.example.tvshowtracker.ui.screens.HomeScreen
 import com.example.tvshowtracker.ui.screens.SearchScreen
 import com.example.tvshowtracker.ui.screens.SettingsScreen
-import kotlinx.serialization.json.Json
 
 @Composable
 fun TvShowNavHost(
@@ -43,14 +40,6 @@ fun TvShowNavHost(
         ) { backStackEntry ->
             val showId = backStackEntry.arguments?.getInt("showId") ?: return@composable
             DetailsScreen(showId = showId, navController = navController)
-        }
-        composable(
-            route = "episode/{episodeJson}",
-            arguments = listOf(navArgument("episodeJson") { type = NavType.StringType })
-        ) { backStackEntry ->
-            val episodeJson = backStackEntry.arguments?.getString("episodeJson") ?: return@composable
-            val episode = Json.decodeFromString<Episode>(episodeJson)
-            EpisodeDetailsScreen(episode = episode, navController = navController)
         }
     }
 }
